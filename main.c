@@ -54,14 +54,17 @@ int starts_with(const char* path, const char* prefix) {
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s <mount path> [--dry-run] [-f|--force]\n", argv[0]);
+        fprintf(stderr, "Usage: %s <mount path> [-d|--dry-run] [-f|--force]\n", argv[0]);
         return 1;
     }
 
     base_path = argv[1];
 
     for (int i = 2; i < argc; i++) {
-        if (strcmp(argv[i], "--dry-run") == 0) dry_run = 1;
+        if (strcmp(argv[i], "--dry-run") == 0 || strcmp(argv[i], "-d") == 0) {
+            dry_run = 1;
+    }
+
         else if (strcmp(argv[i], "-f") == 0 || strcmp(argv[i], "--force") == 0) forced = 1;
     }
 
